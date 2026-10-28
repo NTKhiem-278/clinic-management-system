@@ -1,0 +1,364 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserAccount = 
+ record {
+   active: bool;
+   createdAt: Timestamp;
+   displayName: text;
+   "principal": principal;
+   role: RoleName;
+ };
+type Timestamp = int;
+type RoleName = 
+ variant {
+   admin;
+   doctor;
+   patient;
+   receptionist;
+ };
+type RoleError = 
+ variant {
+   invalidInput: text;
+   notFound: Id;
+   unauthorized;
+ };
+type Role = 
+ record {
+   id: Id;
+   name: RoleName;
+   permissions: vec text;
+ };
+type Result__8 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result__7 = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type Result__6 = 
+ variant {
+   err: AppointmentError;
+   ok: Appointment;
+ };
+type Result__5 = 
+ variant {
+   err: DoctorError;
+   ok: Doctor;
+ };
+type Result__4_2 = 
+ variant {
+   err: PrescriptionError;
+   ok: Prescription;
+ };
+type Result__4_1 = 
+ variant {
+   err: PrescriptionError;
+   ok;
+ };
+type Result__4 = 
+ variant {
+   err: PrescriptionError;
+   ok: PrescriptionDetail;
+ };
+type Result__3 = 
+ variant {
+   err: MedicineError;
+   ok: Medicine;
+ };
+type Result__2 = 
+ variant {
+   err: PatientError;
+   ok: Patient;
+ };
+type Result__1 = 
+ variant {
+   err: MedicalRecordError;
+   ok: MedicalRecord;
+ };
+type Result_1 = 
+ variant {
+   err: RoleError;
+   ok: Role;
+ };
+type Result = 
+ variant {
+   err: AccountError;
+   ok: UserAccount;
+ };
+type PrescriptionView = 
+ record {
+   createdAt: Timestamp;
+   details: vec PrescriptionDetail;
+   doctorId: Id;
+   id: Id;
+   medicalRecordId: Id;
+   notes: text;
+   patientId: Id;
+ };
+type PrescriptionError = 
+ variant {
+   invalidInput: text;
+   notFound: Id;
+   unauthorized;
+ };
+type PrescriptionDetail = 
+ record {
+   dosage: text;
+   id: Id;
+   medicineId: Id;
+   prescriptionId: Id;
+   quantity: nat;
+ };
+type Prescription = 
+ record {
+   createdAt: Timestamp;
+   doctorId: Id;
+   id: Id;
+   medicalRecordId: Id;
+   notes: text;
+   patientId: Id;
+ };
+type PatientInput = 
+ record {
+   address: text;
+   dateOfBirth: text;
+   fullName: text;
+   gender: Gender;
+   notes: text;
+   phone: text;
+ };
+type PatientError = 
+ variant {
+   invalidInput: text;
+   notFound: Id;
+   unauthorized;
+ };
+type Patient = 
+ record {
+   address: text;
+   createdAt: Timestamp;
+   dateOfBirth: text;
+   fullName: text;
+   gender: Gender;
+   id: Id;
+   notes: text;
+   phone: text;
+ };
+type MedicineInput = 
+ record {
+   expiryDate: text;
+   name: text;
+   stockQuantity: nat;
+   unit: text;
+   unitPrice: nat;
+ };
+type MedicineError = 
+ variant {
+   invalidInput: text;
+   notFound: Id;
+   unauthorized;
+ };
+type Medicine = 
+ record {
+   createdAt: Timestamp;
+   expiryDate: text;
+   id: Id;
+   name: text;
+   stockQuantity: nat;
+   unit: text;
+   unitPrice: nat;
+ };
+type MedicalRecordInput = 
+ record {
+   appointmentId: Id;
+   diagnosis: text;
+   examinationResult: text;
+   symptoms: text;
+   testResults: text;
+ };
+type MedicalRecordError = 
+ variant {
+   invalidInput: text;
+   notFound: Id;
+   unauthorized;
+ };
+type MedicalRecord = 
+ record {
+   appointmentId: Id;
+   createdAt: Timestamp;
+   diagnosis: text;
+   doctorId: Id;
+   examinationResult: text;
+   id: Id;
+   patientId: Id;
+   symptoms: text;
+   testResults: text;
+   updatedAt: Timestamp;
+ };
+type Id = nat;
+type Gender = 
+ variant {
+   female;
+   male;
+   other;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type DoctorInput = 
+ record {
+   email: text;
+   fullName: text;
+   phone: text;
+   specialty: text;
+ };
+type DoctorError = 
+ variant {
+   invalidInput: text;
+   notFound: Id;
+   unauthorized;
+ };
+type Doctor = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   fullName: text;
+   id: Id;
+   phone: text;
+   specialty: text;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type AppointmentStatus = 
+ variant {
+   cancelled;
+   completed;
+   confirmed;
+   pending;
+ };
+type AppointmentInput = 
+ record {
+   doctorId: Id;
+   patientId: Id;
+   reason: text;
+   scheduledAt: Timestamp;
+ };
+type AppointmentError = 
+ variant {
+   invalidInput: text;
+   invalidStatusTransition: text;
+   notFound: Id;
+   unauthorized;
+ };
+type Appointment = 
+ record {
+   createdAt: Timestamp;
+   doctorId: Id;
+   id: Id;
+   patientId: Id;
+   reason: text;
+   scheduledAt: Timestamp;
+   status: AppointmentStatus;
+ };
+type AccountError = 
+ variant {
+   invalidInput: text;
+   notFound: principal;
+   unauthorized;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__8);
+  _internet_identity_sign_in_start: () -> (blob);
+  addDetail: (prescriptionId: Id, medicineId: Id, dosage: text, quantity:
+   nat) -> (Result__4);
+  addPermission: (roleId: Id, permission: text) -> (Result_1);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  calculateTotalItems: (prescriptionId: Id) -> (nat) query;
+  checkExpiry: (id: Id) -> (opt text) query;
+  checkStock: (id: Id) -> (opt nat) query;
+  createAppointment: (input: AppointmentInput) -> (Result__6);
+  createDoctor: (input: DoctorInput) -> (Result__5);
+  createMedicine: (input: MedicineInput) -> (Result__3);
+  createPatient: (input: PatientInput) -> (Result__2);
+  createPrescription: (medicalRecordId: Id, patientId: Id, doctorId: 
+   Id, notes: text) -> (Result__4_2);
+  createRecord: (patientId: Id, doctorId: Id, input: MedicalRecordInput) ->
+   (Result__1);
+  createRole: (name: RoleName, permissions: vec text) -> (Result_1);
+  execute: (qJson: text) -> (Result__7) query;
+  getAccount: ("principal": principal) -> (opt UserAccount) query;
+  getApiDoc: () -> (text) query;
+  getAppointment: (id: Id) -> (opt Appointment) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getDoctor: (id: Id) -> (opt Doctor) query;
+  getMedicine: (id: Id) -> (opt Medicine) query;
+  getPatient: (id: Id) -> (opt Patient) query;
+  getPermissions: (roleId: Id) -> (opt vec text) query;
+  getPrescription: (id: Id) -> (opt PrescriptionView) query;
+  getRecord: (id: Id) -> (opt MedicalRecord) query;
+  isCallerAdmin: () -> (bool) query;
+  listAccounts: () -> (vec UserAccount) query;
+  listAppointments: () -> (vec Appointment) query;
+  listAppointmentsByDoctor: (doctorId: Id) -> (vec Appointment) query;
+  listAppointmentsByPatient: (patientId: Id) -> (vec Appointment) query;
+  listDoctors: () -> (vec Doctor) query;
+  listMedicines: () -> (vec Medicine) query;
+  listPatients: () -> (vec Patient) query;
+  listPrescriptions: () -> (vec Prescription) query;
+  listRecords: () -> (vec MedicalRecord) query;
+  listRecordsByPatient: (patientId: Id) -> (vec MedicalRecord) query;
+  listRoles: () -> (vec Role) query;
+  removeDetail: (detailId: Id) -> (Result__4_1);
+  removePermission: (roleId: Id, permission: text) -> (Result_1);
+  schema: () -> (text) query;
+  searchDoctors: (term: text) -> (vec Doctor) query;
+  searchPatients: (term: text) -> (vec Patient) query;
+  setAccountActive: ("principal": principal, active: bool) -> (Result);
+  updateAppointmentStatus: (id: Id, status: AppointmentStatus) -> (Result__6);
+  updateDoctor: (id: Id, input: DoctorInput) -> (Result__5);
+  updateDosage: (detailId: Id, dosage: text, quantity: nat) -> (Result__4);
+  updateMedicine: (id: Id, input: MedicineInput) -> (Result__3);
+  updatePatient: (id: Id, input: PatientInput) -> (Result__2);
+  updateRecord: (id: Id, input: MedicalRecordInput) -> (Result__1);
+  upsertAccount: ("principal": principal, displayName: text, role:
+   RoleName) -> (Result);
+}

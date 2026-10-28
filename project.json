@@ -1,0 +1,22 @@
+{
+  "overview": "Hệ thống quản lí phòng khám đa khoa: quản lí bệnh nhân, bác sĩ, lịch hẹn, hồ sơ khám bệnh, đơn thuốc, kho thuốc và phân quyền người dùng.",
+  "features": [
+    "Đăng nhập và phân quyền theo vai trò (Quản trị, Bác sĩ, Lễ tân, Bệnh nhân)",
+    "Quản lí bệnh nhân: thêm, tìm kiếm, xem và cập nhật thông tin",
+    "Quản lí bác sĩ theo chuyên khoa",
+    "Đặt lịch khám, xác nhận, hủy và cập nhật trạng thái lịch hẹn",
+    "Lập hồ sơ khám bệnh, cập nhật kết quả khám và thêm kết quả xét nghiệm",
+    "Xem lịch sử khám bệnh của bệnh nhân",
+    "Tạo đơn thuốc, thêm/xóa thuốc, cập nhật liều dùng và in đơn thuốc",
+    "Quản lí kho thuốc: tồn kho, hạn sử dụng, cảnh báo hết hàng",
+    "Quản trị viên gán/gỡ quyền cho vai trò và khóa tài khoản"
+  ],
+  "category": "clinic-management",
+  "tags": [
+    "healthcare",
+    "clinic",
+    "management",
+    "vietnamese"
+  ],
+  "last_updated": "2026-10-28T19:39:22.914Z"
+}

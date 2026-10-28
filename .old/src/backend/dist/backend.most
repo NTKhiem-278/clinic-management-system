@@ -1,0 +1,283 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AppointmentStatus__756313735 =
+  {#cancelled; #completed; #confirmed; #pending};
+type AppointmentStatus__949193971 =
+  {#cancelled; #completed; #confirmed; #pending};
+type Appointment__759436893 =
+  {
+    createdAt : Timestamp__771871407;
+    doctorId : Id__274469729;
+    id : Id__274469729;
+    patientId : Id__274469729;
+    reason : Text;
+    scheduledAt : Timestamp__771871407;
+    status : AppointmentStatus__756313735
+  };
+type Appointment__77617247 =
+  {
+    createdAt : Timestamp__301639476;
+    doctorId : Id__389469852;
+    id : Id__389469852;
+    patientId : Id__389469852;
+    reason : Text;
+    scheduledAt : Timestamp__301639476;
+    status : AppointmentStatus__949193971
+  };
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type Doctor__468753071 =
+  {
+    createdAt : Timestamp__301639476;
+    email : Text;
+    fullName : Text;
+    id : Id__389469852;
+    phone : Text;
+    specialty : Text
+  };
+type Doctor__797658541 =
+  {
+    createdAt : Timestamp__771871407;
+    email : Text;
+    fullName : Text;
+    id : Id__274469729;
+    phone : Text;
+    specialty : Text
+  };
+type Gender__67974007 = {#female; #male; #other};
+type Gender__94681853 = {#female; #male; #other};
+type Id__274469729 = Nat;
+type Id__389469852 = Nat;
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type MedicalRecord__524344633 =
+  {
+    appointmentId : Id__389469852;
+    createdAt : Timestamp__301639476;
+    diagnosis : Text;
+    doctorId : Id__389469852;
+    examinationResult : Text;
+    id : Id__389469852;
+    patientId : Id__389469852;
+    symptoms : Text;
+    testResults : Text;
+    updatedAt : Timestamp__301639476
+  };
+type MedicalRecord__899162893 =
+  {
+    appointmentId : Id__274469729;
+    createdAt : Timestamp__771871407;
+    diagnosis : Text;
+    doctorId : Id__274469729;
+    examinationResult : Text;
+    id : Id__274469729;
+    patientId : Id__274469729;
+    symptoms : Text;
+    testResults : Text;
+    updatedAt : Timestamp__771871407
+  };
+type Medicine__405010805 =
+  {
+    createdAt : Timestamp__771871407;
+    expiryDate : Text;
+    id : Id__274469729;
+    name : Text;
+    stockQuantity : Nat;
+    unit : Text;
+    unitPrice : Nat
+  };
+type Medicine__957744280 =
+  {
+    createdAt : Timestamp__301639476;
+    expiryDate : Text;
+    id : Id__389469852;
+    name : Text;
+    stockQuantity : Nat;
+    unit : Text;
+    unitPrice : Nat
+  };
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__201339279;
+    accounts : Map__230067015<Principal, UserAccount__234408822>;
+    appointments : Map__230067015<Id__274469729, Appointment__759436893>;
+    counters :
+      {
+        var nextAppointmentId : Nat;
+        var nextDetailId : Nat;
+        var nextDoctorId : Nat;
+        var nextMedicineId : Nat;
+        var nextPatientId : Nat;
+        var nextPrescriptionId : Nat;
+        var nextRecordId : Nat;
+        var nextRoleId : Nat
+      };
+    doctors : Map__230067015<Id__274469729, Doctor__797658541>;
+    medicines : Map__230067015<Id__274469729, Medicine__405010805>;
+    patients : Map__230067015<Id__274469729, Patient__793202080>;
+    prescriptionDetails :
+      Map__230067015<Id__274469729, PrescriptionDetail__85371051>;
+    prescriptions : Map__230067015<Id__274469729, Prescription__930317612>;
+    records : Map__230067015<Id__274469729, MedicalRecord__899162893>;
+    roles : Map__230067015<Id__274469729, Role__89587817>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type OldActor__512397517 = {};
+type Patient__512300474 =
+  {
+    address : Text;
+    createdAt : Timestamp__301639476;
+    dateOfBirth : Text;
+    fullName : Text;
+    gender : Gender__94681853;
+    id : Id__389469852;
+    notes : Text;
+    phone : Text
+  };
+type Patient__793202080 =
+  {
+    address : Text;
+    createdAt : Timestamp__771871407;
+    dateOfBirth : Text;
+    fullName : Text;
+    gender : Gender__67974007;
+    id : Id__274469729;
+    notes : Text;
+    phone : Text
+  };
+type PrescriptionDetail__117197575 =
+  {
+    dosage : Text;
+    id : Id__389469852;
+    medicineId : Id__389469852;
+    prescriptionId : Id__389469852;
+    quantity : Nat
+  };
+type PrescriptionDetail__85371051 =
+  {
+    dosage : Text;
+    id : Id__274469729;
+    medicineId : Id__274469729;
+    prescriptionId : Id__274469729;
+    quantity : Nat
+  };
+type Prescription__698352342 =
+  {
+    createdAt : Timestamp__301639476;
+    doctorId : Id__389469852;
+    id : Id__389469852;
+    medicalRecordId : Id__389469852;
+    notes : Text;
+    patientId : Id__389469852
+  };
+type Prescription__930317612 =
+  {
+    createdAt : Timestamp__771871407;
+    doctorId : Id__274469729;
+    id : Id__274469729;
+    medicalRecordId : Id__274469729;
+    notes : Text;
+    patientId : Id__274469729
+  };
+type RoleName__732177957 = {#admin; #doctor; #patient; #receptionist};
+type RoleName__91175540 = {#admin; #doctor; #patient; #receptionist};
+type Role__511518169 =
+  {id : Id__389469852; name : RoleName__732177957; permissions : [Text]};
+type Role__89587817 =
+  {id : Id__274469729; name : RoleName__91175540; permissions : [Text]};
+type Timestamp__301639476 = Int;
+type Timestamp__771871407 = Int;
+type UserAccount__234408822 =
+  {
+    active : Bool;
+    createdAt : Timestamp__771871407;
+    displayName : Text;
+    principal : Principal;
+    role : RoleName__91175540
+  };
+type UserAccount__752563332 =
+  {
+    active : Bool;
+    createdAt : Timestamp__301639476;
+    displayName : Text;
+    principal : Principal;
+    role : RoleName__732177957
+  };
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "00000000_000000" : OldActor__512397517 -> NewActor__769816496
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable accounts :
+    {
+      var root : Node__204828119<Principal, UserAccount__752563332>;
+      var size : Nat__227979830
+    };
+  stable appointments :
+    {
+      var root : Node__204828119<Id__389469852, Appointment__77617247>;
+      var size : Nat__227979830
+    };
+  stable counters :
+    {
+      var nextAppointmentId : Nat;
+      var nextDetailId : Nat;
+      var nextDoctorId : Nat;
+      var nextMedicineId : Nat;
+      var nextPatientId : Nat;
+      var nextPrescriptionId : Nat;
+      var nextRecordId : Nat;
+      var nextRoleId : Nat
+    };
+  stable doctors :
+    {
+      var root : Node__204828119<Id__389469852, Doctor__468753071>;
+      var size : Nat__227979830
+    };
+  stable medicines :
+    {
+      var root : Node__204828119<Id__389469852, Medicine__957744280>;
+      var size : Nat__227979830
+    };
+  stable patients :
+    {
+      var root : Node__204828119<Id__389469852, Patient__512300474>;
+      var size : Nat__227979830
+    };
+  stable prescriptionDetails :
+    {
+      var root : Node__204828119<Id__389469852, PrescriptionDetail__117197575>;
+      var size : Nat__227979830
+    };
+  stable prescriptions :
+    {
+      var root : Node__204828119<Id__389469852, Prescription__698352342>;
+      var size : Nat__227979830
+    };
+  stable records :
+    {
+      var root : Node__204828119<Id__389469852, MedicalRecord__524344633>;
+      var size : Nat__227979830
+    };
+  stable roles :
+    {
+      var root : Node__204828119<Id__389469852, Role__511518169>;
+      var size : Nat__227979830
+    }
+};
